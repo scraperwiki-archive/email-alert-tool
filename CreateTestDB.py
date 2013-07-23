@@ -2,7 +2,7 @@ import sqlite3
 import random
 import os
 
-table_definition = "CREATE TABLE dumptruck (main TEXT)"
+table_definition = "CREATE TABLE swdata (main TEXT)"
 
 def create_file():
     file = open('scraperwiki.sqlite', 'w+')
@@ -26,7 +26,7 @@ def insert_random_values_into_database():
         Connection = sqlite3.connect('scraperwiki.sqlite', isolation_level=None)
         Cursor = Connection.cursor()
         print item
-        Cursor.execute("INSERT INTO dumptruck VALUES ( ?)", [item])
+        Cursor.execute("INSERT INTO swdata VALUES ( ?)", [item])
         #Cursor.commit()
 
 def main():
