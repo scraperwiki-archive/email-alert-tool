@@ -11,7 +11,7 @@ def open_json_and_convert_to_dictionary():
         return json_out
     else: 
         print "No Json file found. Write one, and then maybe we'll think about sending you some email updates. Maybe"
-        exit()
+        exit(1)
 
 def get_current_count_in_sqlite():
     Connection = sqlite3.connect('scraperwiki.sqlite')
@@ -28,7 +28,10 @@ def compare_contents_of_file():
     if config['count'] < Count:
        send_report()
     else:
-        exit()
+       return
+    config['count']=Count
+    json.dump(config, open("metadata.json", "w")
+
 
 def send_report():
     FROM_USER = "noreply@scraperwiki.com"
