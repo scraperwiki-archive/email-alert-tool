@@ -41,6 +41,7 @@ def send_report():
        "To: " + recipient,
        "MIME-Version: 1.0",
        "Content-Type: text/html"]
+    body = "Please check your dataset"
     headers = "\r\n".join(headers)
     server = smtplib.SMTP('localhost', 25)
     server.ehlo()
