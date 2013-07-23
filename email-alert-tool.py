@@ -7,7 +7,6 @@ def open_json_and_convert_to_dictionary():
     if os.path.isfile('metadata.json') == True:
         json_string = open('metadata.json').read()
         json_out = json.loads(json_string)
-        print "Opening JSON file"
         return json_out
     else: 
         print "No Json file found. Write one, and then maybe we'll think about sending you some email updates. Maybe"
@@ -17,14 +16,12 @@ def get_current_count_in_sqlite():
     Connection = sqlite3.connect('scraperwiki.sqlite')
     Cursor = Connection.cursor()
     Cursor.execute('SELECT count(*) FROM swdata')
-    Count, = Cursor.fetchone()
-    return Count
+    count, = Cursor.fetchone()
+    return count
 
 def compare_contents_of_file():
     config = open_json_and_convert_to_dictionary()
     Count = get_current_count_in_sqlite()
-    print config['count']
-    print Count
     if config['count'] < Count:
        send_report()
     else:
