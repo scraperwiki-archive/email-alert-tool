@@ -4,10 +4,11 @@ import sqlite3
 import smtplib
 
 def open_json_and_convert_to_dictionary():
-    if os.path.isfile('metadata.json') == false:
-        json_file = open('filemeta.json')
-        json_file = json.dumps(json_file)
-        return json_file
+    if os.path.isfile('metadata.json') == True:
+        json_string = open('metadata.json').read()
+        json_out = json.loads(json_string)
+        print "Opening JSON file"
+        return json_out
     else: 
         print "No Json file found. Write one, and then maybe we'll think about sending you some email updates. Maybe"
         exit()
@@ -15,21 +16,24 @@ def open_json_and_convert_to_dictionary():
 def get_current_count_in_sqlite():
     Connection = sqlite3.connect('scraperwiki.sqlite')
     Cursor = Connection.cursor()
-    Count = Cursor.execute('SELECT count(*) FROM swdata')
+    Cursor.execute('SELECT count(*) FROM swdata')
+    Count = Cursor.fetchone()
     return Count
 
 def compare_contents_of_file():
-    json_file = open_json_and_convert_to_dictionary()
+    config = open_json_and_convert_to_dictionary()
     Count = get_current_count_in_sqlite()
-    if json_file['count'] < Count:
+    print config['count']
+    print Count
+    if config['count'] < Count:
        send_report()
     else:
         exit()
 
 def send_report():
-    FROM_EMAIL = "noreply@scraperwiki.com"
+    FROM_USER = "noreply@scraperwiki.com"
     subject = "There are updated rows"
-    json_file = open_json_and_convert()
+    json_file = open_json_and_convert_to_dictionary()
     recipient = json_file['recipient']
     headers = [
        "From: " + FROM_USER,
@@ -45,7 +49,7 @@ def send_report():
 
 def main():
     get_current_count_in_sqlite()
-    compare_contents_of_file
+    compare_contents_of_file()
 
 if __name__ == '__main__':
     main()
