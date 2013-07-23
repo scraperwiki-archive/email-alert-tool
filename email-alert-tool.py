@@ -17,7 +17,7 @@ def get_current_count_in_sqlite():
     Connection = sqlite3.connect('scraperwiki.sqlite')
     Cursor = Connection.cursor()
     Cursor.execute('SELECT count(*) FROM swdata')
-    Count = Cursor.fetchone()
+    Count, = Cursor.fetchone()
     return Count
 
 def compare_contents_of_file():
@@ -30,7 +30,7 @@ def compare_contents_of_file():
     else:
        return
     config['count']=Count
-    json.dump(config, open("metadata.json", "w")
+    json.dump(config, open("metadata.json", "w"))
 
 
 def send_report():
