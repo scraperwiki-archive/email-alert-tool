@@ -29,10 +29,11 @@ def get_count_from_endpoint():
     config_file = open_json_and_convert_to_dictionary()
     dataset = config_file['dataset']
     view = config_file['view']
+    table_name = config_file['tablename']
     if dataset == None or view == None:
         print 'You must specify the SQL endpoint'
         exit()
-    request = requests.get('https://premium.scraperwiki.com/%s/%s/sql/?q=select count(*) from swdata;' % (dataset, view))
+    request = requests.get('https://premium.scraperwiki.com/%s/%s/sql/?q=select count(*) from %s;' % (dataset, view, table_name))
     endpoint_json = request.json()
     endpoint_json = endpoint_json[0]
     endpoint_count = endpoint_json['count(*)']
