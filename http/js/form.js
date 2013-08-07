@@ -1,8 +1,8 @@
 $(function() {
 
     var execSuccess = function(execOutput) {
-        var datasetUrl = '/dataset/' + scraperwiki.box
-        scraperwiki.tool.redirect(datasetUrl)
+        $('#submitBtn').removeClass('loading').html('Save')
+        $('#submitBtn').attr('disabled', false)
     }
 
     var populateForm = function() {
@@ -27,11 +27,13 @@ $(function() {
     }
     
     $('#submitBtn').on('click', function() {
+        $(this).attr('disabled', true)  // Disable further clicks.
+        $(this).addClass('loading').html('Loading&hellip;')  // Spinny loader.
         var email = $('#email').val()
         var tableName = $('#tablename').val()
         var endpointUrl = scraperwiki.readSettings().source.url + '/sqlite?q=select count(*) from ' + tableName + ';'
-         console.log(scraperwiki.shellEscape('/home/tool/http/update_json.py ' + email + ' ' + endpointUrl + ' '  + tableName))
-         scraperwiki.exec('/home/tool/http/update_json.py ' + email + ' ' + scraperwiki.shellEscape(endpointUrl) + ' '  + tableName, execSuccess)
+        console.log(scraperwiki.shellEscape('/home/tool/http/update_json.py ' + email + ' ' + endpointUrl + ' '  + tableName))
+        scraperwiki.exec('/home/tool/http/update_json.py ' + email + ' ' + scraperwiki.shellEscape(endpointUrl) + ' '  + tableName, execSuccess)
     })
   $(document).ready(function(){
     populateForm()
