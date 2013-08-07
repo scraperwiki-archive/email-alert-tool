@@ -1,0 +1,5 @@
+{
+  "displayName": "Alert by email",
+  "description": "Notifies when new rows appear in a database",
+  "color" : "#eb7b15"
+}
