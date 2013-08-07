@@ -7,8 +7,8 @@ import argparse
 import scraperwiki
 
 def open_json_and_convert_to_dictionary():
-    if os.path.isfile('metadata1.json') == True:
-        json_string = open('metadata1.json').read()
+    if os.path.isfile('../metadata.json') == True:
+        json_string = open('../metadata.json').read()
         json_out = json.loads(json_string)
         return json_out
     else: 

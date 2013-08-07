@@ -6,14 +6,14 @@ $(function() {
     }
 
     var populateForm = function() {
-        var email = scraperwiki.sql.("select value_blob from swvariables where name='recipient';", function(data, textStatus, jqXHR) {
+        var email = scraperwiki.sql("select value_blob from swvariables where name='recipient';", function(data, textStatus, jqXHR) {
             console.log("Success")
         },
         function(jqXHR, textStatus, errorThrown) {
             console.log("Error! " + jqXHR + textStatus + errorThrown)   
         })
  
-        var tableName = scraperwiki.sql.("select value_blob from swvariables where name='tablename';", function(data, textStatus, jqXHR) {
+        var tableName = scraperwiki.sql("select value_blob from swvariables where name='tablename';", function(data, textStatus, jqXHR) {
             console.log("Success")
         },
         function(jqXHR, textStatus, errorThrown) {
@@ -22,7 +22,8 @@ $(function() {
 
         $('#email').val(email);
         $('#tablename').val(tableName);
-
+        console.log(email)
+        console.log(tableName)
     }
     
     $('#submit').on('click', function() {
@@ -32,4 +33,9 @@ $(function() {
 
         scraperwiki.exec('../update_json.py ' + email + ' ' + endpointUrl + ' '  + tableName, execSuccess)
     })
+  $(document).ready(function(){
+    populateForm()
+  })
 })
+
+
