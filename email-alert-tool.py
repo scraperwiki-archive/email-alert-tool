@@ -27,17 +27,13 @@ def compare_contents_of_file():
 
 def get_count_from_endpoint():
     config_file = open_json_and_convert_to_dictionary()
-    dataset = config_file['dataset']
-    view = config_file['view']
     table_name = config_file['tablename']
-    if dataset == None or view == None:
-        print 'You must specify the SQL endpoint'
-        exit()
-    request = requests.get('https://premium.scraperwiki.com/%s/%s/sql/?q=select count(*) from %s;' % (dataset, view, table_name))
+    url = config_file['url']
+    request = requests.get(url)
     endpoint_json = request.json()
     endpoint_json = endpoint_json[0]
     endpoint_count = endpoint_json['count(*)']
-    if endpoint_count == 0:
+    if endpoint_count == 0 or endpoint_count == None:
         print 'No fields were found'
         subject = "Your SQL endpoint is teh borked"
         message = "No rows were found in your endpoint"

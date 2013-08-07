@@ -17,12 +17,10 @@ def update_json_file():
     config = open_json_and_convert_to_dictionary()
     config['recipient'] = sys.argv[1]
     scraperwiki.sqlite.save_var("recipient", sys.argv[1])
-    config['dataset'] = sys.argv[2]
-    scraperwiki.sqlite.save_var("dataset", sys.argv[2])
-    config['view'] = sys.argv[3]
-    scraperwiki.sqlite.save_var("view", sys.argv[3])
-    config['tablename'] = sys.argv[4]
-    scraperwiki.sqlite.save_var("tablename", sys.argv[4])
+    config['url'] = sys.argv[2]
+    scraperwiki.sqlite.save_var("url", sys.argv[2])
+    config['tablename'] = sys.argv[3]
+    scraperwiki.sqlite.save_var("tablename", sys.argv[3])
     json.dump(config, open("metadata1.json", "w"))
 
 
@@ -30,7 +28,7 @@ def main():
     update_json_file()
 
 if __name__ == '__main__':
-   if len(sys.argv) == 5:
+   if len(sys.argv) == 4:
        main()
    else: 
        "Not enough arguments."
