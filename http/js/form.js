@@ -29,7 +29,7 @@ $(function() {
     $('#submitBtn').on('click', function() {
         var email = $('#email').val()
         var tableName = $('#tablename').val()
-        var endpointUrl = scraperwiki.readSettings().target.url + '/sqlite?q=select count(*) from ' + tableName + ';'
+        var endpointUrl = scraperwiki.readSettings().source.url + '/sqlite?q=select count(*) from ' + tableName + ';'
         scraperwiki.exec('../update_json.py ' + email + ' ' + endpointUrl + ' '  + tableName, execSuccess)
     })
   $(document).ready(function(){
