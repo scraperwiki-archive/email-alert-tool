@@ -7,4 +7,4 @@ watched and the email address to be alerted are both configurable.
 Testing
 -------
 
-The *create-test-db.py* script can be used to add 100 rows of test data to the swdata table.
+The *create-test-db.py* script creates a new database and adds 100 rows of test data to the swdata table. This is for testing that your environment works. 

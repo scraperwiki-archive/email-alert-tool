@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import argparse
+import scraperwiki
 
 def open_json_and_convert_to_dictionary():
     if os.path.isfile('metadata1.json') == True:
@@ -13,8 +14,15 @@ def open_json_and_convert_to_dictionary():
         exit(1)
 
 def update_json_file():
-    config = {}
-    config['table']="hello"
+    config = open_json_and_convert_to_dictionary()
+    config['recipient'] = sys.argv[1]
+    scraperwiki.sqlite.save_var("recipient", sys.argv[1])
+    config['dataset'] = sys.argv[2]
+    scraperwiki.sqlite.save_var("dataset", sys.argv[2])
+    config['view'] = sys.argv[3]
+    scraperwiki.sqlite.save_var("view", sys.argv[3])
+    config['tablename'] = sys.argv[4]
+    scraperwiki.sqlite.save_var("tablename", sys.argv[4])
     json.dump(config, open("metadata1.json", "w"))
 
 
@@ -22,9 +30,8 @@ def main():
     update_json_file()
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="A tool for updating the configuration file used by the email-alert-tool")
-    
-    if len(sys.argv) == 5:
-        main()
-    else: 
-        print 'Not enough arguments'
+   if len(sys.argv) == 5:
+       main()
+   else: 
+       "Not enough arguments."
+       exit() 
