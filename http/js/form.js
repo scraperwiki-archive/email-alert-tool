@@ -30,7 +30,8 @@ $(function() {
         var email = $('#email').val()
         var tableName = $('#tablename').val()
         var endpointUrl = scraperwiki.readSettings().source.url + '/sqlite?q=select count(*) from ' + tableName + ';'
-        scraperwiki.exec('../update_json.py ' + email + ' ' + endpointUrl + ' '  + tableName, execSuccess)
+         console.log(scraperwiki.shellEscape('/home/tool/http/update_json.py ' + email + ' ' + endpointUrl + ' '  + tableName))
+         scraperwiki.exec('/home/tool/http/update_json.py ' + email + ' ' + scraperwiki.shellEscape(endpointUrl) + ' '  + tableName, execSuccess)
     })
   $(document).ready(function(){
     populateForm()
