@@ -26,7 +26,7 @@ $(function() {
         console.log(tableName)
     }
     
-    $('#submit').on('click', function() {
+    $('#submitBtn').on('click', function() {
         var email = $('#email').val()
         var tableName = $('#tablename').val()
         var endpointUrl = scraperwiki.readSettings().target.url + '/sqlite?q=select count(*) from ' + tableName + ';'

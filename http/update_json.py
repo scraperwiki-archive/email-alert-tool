@@ -7,8 +7,9 @@ import argparse
 import scraperwiki
 
 def open_json_and_convert_to_dictionary():
-    if os.path.isfile('~/tool/metadata.json') == True:
-        json_string = open('~/tool/metadata.json').read()
+    print os.getcwd()
+    if os.path.isfile(os.getcwd() +  '/metadata.json') == True:
+        json_string = open(os.getcwd() + '/metadata.json').read()
         json_out = json.loads(json_string)
         return json_out
     else: 
@@ -40,5 +41,5 @@ if __name__ == '__main__':
        print len(sys.argv)
        main()
    else: 
-       "Not enough arguments."
+       print "Not enough arguments."
        exit() 
