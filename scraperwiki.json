@@ -1,5 +1,6 @@
 {
   "displayName": "Alert by email",
   "description": "Notifies when new rows appear in a database",
-  "color" : "#eb7b15"
+  "color" : "#eb7b15",
+  "icon": "https://s3-eu-west-1.amazonaws.com/sw-icons/tool-icon-email-alert.png"
 }
